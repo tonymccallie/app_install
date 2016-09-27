@@ -11,7 +11,9 @@ class JobsController extends AppController {
 			'data' => 'Search Init'
 		);
 		
-		$conditions = array();
+		$conditions = array(
+			'OR' => array()
+		);
 		
 		$params = json_decode(file_get_contents('php://input'),true);
 		
@@ -19,7 +21,7 @@ class JobsController extends AppController {
 			
 			foreach($params as $param => $value) {
 				if($param != 'salary') {
-					$conditions[$param] = $value;
+					$conditions['OR'][$param] = $value;
 				} else {
 					switch($value) {
 						case "A":
