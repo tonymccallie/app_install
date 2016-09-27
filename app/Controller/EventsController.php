@@ -2,7 +2,7 @@
 App::uses('AppController', 'Controller');
 class EventsController extends AppController {
 	function ajax_upcoming() {
-		Configure::write('debug', 2);
+		Configure::write('debug', 0);
 		$this->layout = "ajax";
 		$this->view = "ajax";
 		

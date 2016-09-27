@@ -39,7 +39,7 @@ class UsersController extends AppController {
 	}
 	
 	function ajax_facebook() {
-		Configure::write('debug', 2);
+		Configure::write('debug', 0);
 		$this->layout = "ajax";
 		$this->view = "ajax";
 		
@@ -272,7 +272,7 @@ class UsersController extends AppController {
 	}
 	
 	function ajax_upload() {
-		Configure::write('debug', 2);
+		Configure::write('debug', 0);
 		$this->layout = "ajax";
 		$this->view = "ajax";
 		
