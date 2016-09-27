@@ -56,7 +56,7 @@ class UsersController extends AppController {
 				if(!$user) {
 					$user = array(
 						'User' => array(
-							'facebook' => $params['id'],
+							'facebook_id' => $params['id'],
 							'email' => $params['email'],
 							'first_name' => $params['first_name'],
 							'last_name' => $params['last_name'],
@@ -66,12 +66,12 @@ class UsersController extends AppController {
 						)
 					);	
 				} else {
-					$user['User']['facebook'] = $params['id'];
+					$user['User']['facebook_id'] = $params['id'];
 					$user['User']['email'] = $params['email'];
 				}
 				$this->User->create();
-				if($this->User->save($user)) {
-					$user = $this->User->findByFacebook($params['id']);
+				if($this->User->save($user,false)) {
+					$user = $this->User->findByFacebookId($params['id']);
 					$message = array(
 						'status' => 'SUCCESS',
 						'data' => $user
@@ -250,7 +250,10 @@ class UsersController extends AppController {
 			'data' => 'Init'
 		);
 		
-		$params = json_decode(file_get_contents('php://input'),true);
+		$params = array('User'=>array());
+		
+		$params['User'] = json_decode(file_get_contents('php://input'),true);
+		$this->log($params);
 		$params['User']['json'] = json_encode($params['data']);
 		unset($params['User']['spouse_id']);
 		unset($params['Spouse']);

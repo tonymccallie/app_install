@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>MarriageStrong</title>
+	<title>Go Amarillo</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="description" content="">
 	<meta name="author" content="">
@@ -67,6 +67,10 @@
 						<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="admin_dropdown">Admin <b class="caret"></b></a>
 							<ul class="dropdown-menu">
 								<li><?php echo $this->Html->link('Users','/admin/users') ?></li>
+								<li><?php echo $this->Html->link('Events','/admin/events') ?></li>
+								<li><?php echo $this->Html->link('Jobs','/admin/jobs') ?></li>
+								<li><?php echo $this->Html->link('Job Descriptions','/admin/descriptions') ?></li>
+								<li><?php echo $this->Html->link('Articles','/admin/articles') ?></li>
 							</ul>
 						</li>
 						<?php endif ?>
@@ -87,7 +91,7 @@
 		<?php echo $this->Session->flash(); ?>
 		<div class="row-fluid">
 			<?php echo $content_for_layout ?>
-			<?php echo Authsome::get('email') ?>
+			<?php //echo Authsome::get('email') ?>
 		</div>
 	</div>
 
