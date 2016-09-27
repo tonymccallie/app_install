@@ -22,7 +22,7 @@ class EventsController extends AppController {
 		$index = -1;
 		
 		foreach($events as $event) {
-			$monthName = date('M Y',strtotime($event['Event']['event_date']));
+			$monthName = date('F Y',strtotime($event['Event']['event_date']));
 			if($curMonth != $monthName) {
 				$curMonth = $monthName;
 				$index++;
