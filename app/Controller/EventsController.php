@@ -76,7 +76,16 @@ class EventsController extends AppController {
 	}
 	
 	function admin_delete($id = null) {
-		
+		$this->Event->id = $id;
+		if (!$this->Event->exists()) {
+			throw new NotFoundException(__('Invalid event'));
+		}
+		if ($this->Event->delete()) {
+			$this->Session->setFlash('Event deleted','success');
+			$this->redirect(array('action' => 'index'));
+		}
+		$this->Session->setFlash('Event was not deleted','error');
+		$this->redirect(array('action' => 'index'));
 	}
 }
 ?>

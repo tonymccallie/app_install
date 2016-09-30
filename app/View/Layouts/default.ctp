@@ -71,6 +71,8 @@
 								<li><?php echo $this->Html->link('Jobs','/admin/jobs') ?></li>
 								<li><?php echo $this->Html->link('Job Descriptions','/admin/descriptions') ?></li>
 								<li><?php echo $this->Html->link('Articles','/admin/articles') ?></li>
+								<li><?php echo $this->Html->link('Schools','/admin/schools') ?></li>
+								<li><?php echo $this->Html->link('Counselors','/admin/counselors') ?></li>
 							</ul>
 						</li>
 						<?php endif ?>
