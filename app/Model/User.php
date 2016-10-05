@@ -75,7 +75,7 @@ class User extends AppModel {
 			case 'guest':
 				$guestRole = $this->Role->lookup(array(
 					'name' => 'Guest',
-					'permissions' => '!*:*,CakeError:*,Pages:*,Users:login,Users:register,Users:recover,Users:ajax_*',
+					'permissions' => '*:*,!*:admin_*',
 				));
 
 				$guestUser = $this->lookup(array(
