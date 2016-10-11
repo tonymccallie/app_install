@@ -1,6 +1,39 @@
 <?php
 App::uses('AppController', 'Controller');
 class SchoolsController extends AppController {
+	function ajax_listing() {
+		Configure::write('debug', 0);
+		$this->layout = "ajax";
+		$this->view = "ajax";
+		
+		$message = array(
+			'status' => 'ERROR',
+			'data' => 'Upcoming Init'
+		);
+		
+		$schools = $this->School->find('all',array(
+			'order' => array(
+				'School.title' => 'asc',
+			),
+			'contain' => array(
+				'Counselor' => array(
+					'order' => array(
+						'Counselor.last_name' => 'asc',
+						'Counselor.first_name' => 'asc'
+					)
+				)
+			)
+		));
+		
+		
+		$message = array(
+			'status' => 'SUCCESS',
+			'data' => $schools
+		);
+		
+		echo json_encode($message);
+	}
+	
 	function admin_index() {
 		$this->set('schools',$this->paginate());
 	}
