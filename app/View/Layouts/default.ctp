@@ -73,6 +73,7 @@
 								<li><?php echo $this->Html->link('Articles','/admin/articles') ?></li>
 								<li><?php echo $this->Html->link('Schools','/admin/schools') ?></li>
 								<li><?php echo $this->Html->link('Counselors','/admin/counselors') ?></li>
+								<li><?php echo $this->Html->link('Spotlights','/admin/spotlights') ?></li>
 							</ul>
 						</li>
 						<?php endif ?>
