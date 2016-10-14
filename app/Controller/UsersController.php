@@ -254,9 +254,6 @@ class UsersController extends AppController {
 		
 		$params['User'] = json_decode(file_get_contents('php://input'),true);
 		$this->log($params);
-		$params['User']['json'] = json_encode($params['data']);
-		unset($params['User']['spouse_id']);
-		unset($params['Spouse']);
 		
 		if($this->User->save($params,array('validate'=>false))) {
 			$user = $this->User->findById($params['User']['id']);
@@ -291,6 +288,40 @@ class UsersController extends AppController {
 		
 		echo $message;
 	}
+	
+	function ajax_counselor() {
+		Configure::write('debug', 0);
+		$this->layout = "ajax";
+		$this->view = "ajax";
+		
+		$message = array(
+			'status' => 'SUCCESS',
+			'data' => 'Init'
+		);
+		
+		$params = json_decode(file_get_contents('php://input'),true);
+		$this->log(array('COUNSELOR',$params));
+		
+		echo json_encode($message);
+	}
+	
+	function ajax_share() {
+		Configure::write('debug', 0);
+		$this->layout = "ajax";
+		$this->view = "ajax";
+		
+		$message = array(
+			'status' => 'SUCCESS',
+			'data' => 'Init'
+		);
+		
+		$params = json_decode(file_get_contents('php://input'),true);
+		$this->log(array('SHARE',$params));
+		
+		echo json_encode($message);
+	}
+	
+	
 	
 	function ajax_cron() {
 		Configure::write('debug', 0);
