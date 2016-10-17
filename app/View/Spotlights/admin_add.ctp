@@ -8,7 +8,8 @@
 		echo $this->Form->create();
 			echo $this->Form->input('title',array('class'=>'span12'));
 			echo $this->Form->input('descr',array('class'=>'span12'));
-			echo $this->Form->input('youtube',array('class'=>'span12'));
+			echo $this->Form->input('video',array('class'=>'span12'));
+			echo $this->Form->input('poster',array('class'=>'span12'));
 			echo $this->Form->input('start',array());
 		echo $this->Form->end(array('label'=>'Create Spotlight','class'=>'btn'));
 	?>
