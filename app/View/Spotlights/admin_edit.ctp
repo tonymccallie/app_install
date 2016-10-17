@@ -1,6 +1,9 @@
 <div class="admin_header">
 	<h3>
 		<i class="icon-edit"></i> Edit Spotlight
+		<div class="btn-group pull-right">
+			<?php echo $this->Html->link('<i class="icon-trash"></i> ', array('action' => 'delete', $this->data['Spotlight']['id']), array('escape'=>false,'class'=>'btn'),'Are you sure you want to delete this Spotlight?'); ?>
+		</div>
 	</h3>
 </div>
 <div class="">
