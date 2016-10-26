@@ -211,14 +211,14 @@ class Common {
  * @access public
  * @return void
  */
-	function currentUrl() {
+	public function currentUrl() {
 		$pageURL = 'http';
 		$pageURL .= "://";
 		if(!empty($_SERVER['SERVER_PORT'])) {
 			if($_SERVER["SERVER_PORT"] != "80") {
-				$pageURL .= $_SERVER["SERVER_NAME"].":".$_SERVER["SERVER_PORT"].$this->webroot;
+				$pageURL .= $_SERVER["SERVER_NAME"].":".$_SERVER["SERVER_PORT"].'/';
 			} else {
-				$pageURL .= $_SERVER["SERVER_NAME"].$this->webroot;
+				$pageURL .= $_SERVER["SERVER_NAME"].'/';
 			}
 		} else {
 			$pageURL .= 'www.grouppost.com'.$this->webroot;
@@ -272,7 +272,7 @@ class Common {
  * @param array $config. (default: array())
  * @return void
  */
-	function email($config = array(), $message = "") {
+	static function email($config = array(), $message = "") {
 		$settings = array(
 			'to' => 'UNSET TO <info@greyback.net>',
 			'cc' => array(),

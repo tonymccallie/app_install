@@ -1,6 +1,61 @@
 <?php
 App::uses('AppController', 'Controller');
 class UsersController extends AppController {
+	public $careersteps = array(
+		'step1' => "Choose Career School",
+		'step2' => "Tour Career School",
+		'step3' => "Interview Past Graduate",
+		'step4' => "Fill Out Application",
+		'step5' => "Submit Application Fee (If Required)",
+		'step6' => "Schedule Start Date"
+	);
+
+	public $militarysteps = array(
+		'step1' => "Decide Enlisted or Officer",
+		'step2' => "Visiting a Recruiter",
+		'step3' => "Military Entrance Processing Station (MEPS)",
+		'step4' => "Pass the Armed Services Vocational Aptitude Battery (ASVAB)",
+		'step5' => "Pass the Physical Examination",
+		'step6' => "Meet With a MEPS Career Counselor and Determine a Career",
+		'step7' => "Take the Oath of Enlistment (swearing in)",
+		'step8' => "Basic Training (Boot Camp)"
+	);
+
+	public $collegesteps = array(
+		'step1' => "Get the application",
+		'step2' => "Make a note of the regular application deadline",
+		'step3' => "Make a note of the early application deadline",
+		'step4' => "Request high school transcript sent",
+		'step5' => "Request midyear grade report sent",
+		'step6' => "Find out if an admission test is required",
+		'step7' => "Take an admission test, if required",
+		'step8' => "Take required or recommended tests (SAT, ACT, TSI, AP Exams)",
+		'step9' => "Send admission-test scores",
+		'step10' => "Send other test scores",
+		'step11' => "Request recommendation letters",
+		'step12' => "Send thank-you notes to recommendation writers",
+		'step13' => "Draft initial essay",
+		'step14' => "Proofread essay for spelling and grammar",
+		'step15' => "Revise your essay",
+		'step16' => "Interview at college campus",
+		'step17' => "Submit FAFSA",
+		'step18' => "Make a note of the priority financial aid deadline",
+		'step19' => "Make a note of the regular financial aid deadline",
+		'step20' => "Complete college application",
+		'step21' => "Make copies of all application materials",
+		'step22' => "Pay application fee",
+		'step23' => "Sign and send application",
+		'step24' => "Submit college aid form, if needed",
+		'step25' => "Submit state aid form, if needed",
+		'step26' => "Confirm receipt of application materials",
+		'step27' => "Send additional material, if needed",
+		'step28' => "Tell school counselor that you applied",
+		'step29' => "Receive letter from office of admission",
+		'step30' => "Receive financial aid award letter",
+		'step31' => "Meet deadline to accept admission and send deposit",
+		'step32' => "Accept financial aid offer",
+		'step33' => "Notify the colleges you will not attend"
+	);
 	
 	function ajax_login() {
 		Configure::write('debug', 0);
@@ -300,7 +355,40 @@ class UsersController extends AppController {
 		);
 		
 		$params = json_decode(file_get_contents('php://input'),true);
-		$this->log(array('COUNSELOR',$params));
+		//$this->log(array('COUNSELOR',$params));
+		
+		$Schools = ClassRegistry::init('School');
+		
+		$school = $Schools->findByTitle($params['User']['school']);
+		
+		if($school) {
+			$counselors = Set::extract('/Counselor/email', $school);
+			$json = json_decode($params['User']['json'], true);
+			
+			switch($json['path']) {
+				case 'Career School':
+					$steps = $this->careersteps;
+					break;
+				case 'Military':
+					$steps = $this->militarysteps;
+					break;
+				default:
+					$steps = $this->collegesteps;
+					break;
+			}
+			
+			Common::email(array(
+				'to' => $counselors,
+				'subject' => "Here's my plan - ".$params['User']['first_name'].' '.$params['User']['last_name'],
+				'template' => 'share',
+				'replyTo' => $params['User']['email'],
+				'variables' => array(
+					'data' => $params,
+					'steps' => $steps,
+					'json' => $json
+				)
+			),'');
+		}
 		
 		echo json_encode($message);
 	}
@@ -316,7 +404,32 @@ class UsersController extends AppController {
 		);
 		
 		$params = json_decode(file_get_contents('php://input'),true);
-		$this->log(array('SHARE',$params));
+		
+		$json = json_decode($params['user']['User']['json'], true);
+			
+		switch($json['path']) {
+			case 'Career School':
+				$steps = $this->careersteps;
+				break;
+			case 'Military':
+				$steps = $this->militarysteps;
+				break;
+			default:
+				$steps = $this->collegesteps;
+				break;
+		}
+		
+		Common::email(array(
+			'to' => $params['email'],
+			'subject' => "Here's my plan - ".$params['user']['User']['first_name'].' '.$params['user']['User']['last_name'],
+			'template' => 'share',
+			'replyTo' => $params['user']['User']['email'],
+			'variables' => array(
+				'data' => $params['user'],
+				'steps' => $steps,
+				'json' => $json
+			)
+		),'');
 		
 		echo json_encode($message);
 	}
