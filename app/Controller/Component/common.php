@@ -277,7 +277,7 @@ class Common {
 			'to' => 'UNSET TO <info@greyback.net>',
 			'cc' => array(),
 			'bcc' => array(),
-			'from' => array('info@greyback.net'=>'GreybackDeveloper'),
+			'from' => array('email@goamarillo.org'=>'Go Amarillo'),
 			'subject' => 'SUBJECT',
 			'title' => 'TITLE',
 			'template' => 'simple',
@@ -290,7 +290,7 @@ class Common {
 		
 		App::uses('CakeEmail', 'Network/Email');
 		$email = new CakeEmail();
-		$email->config('gmail');
+		$email->config('smtp');
 		$email->from($config['from'])
 			->to($config['to'])
 			->subject($config['subject'])

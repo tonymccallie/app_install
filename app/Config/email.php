@@ -16,7 +16,21 @@ class EmailConfig {
         'transport' => 'Smtp'
     );
 
-	public $smtp = array(
+public $smtp = array(
+                'transport' => 'Smtp',
+                'from' => array('email@goamarillo.org' => 'Go Amarillo'),
+                'host' => 'ssl://email-smtp.us-east-1.amazonaws.com',
+                'port' => 465,
+                'timeout' => 30,
+                'username' => 'AKIAJX3LZ4E7C4S3PPZA',
+                'password' => 'AhinLKTr0nxAVBmNUBhsYskhPHKXS8Td+ytJ/JXe3uGG',
+                //'client' => null,
+                'log' => true
+                //'charset' => 'utf-8',
+                //'headerCharset' => 'utf-8',
+        );
+
+	public $smtpX = array(
 		'transport' => 'Smtp',
 		'from' => array('site@localhost' => 'My Site'),
 		'host' => 'localhost',
