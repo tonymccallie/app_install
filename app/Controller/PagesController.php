@@ -76,6 +76,9 @@ class PagesController extends AppController {
 			'conditions' => array(
 				'User.role_id' => 2
 			),
+			'order' => array(
+				'User.school' => 'asc'	
+			),
 			'contain' => array(),
 			'group' => array(
 				'User.school'
