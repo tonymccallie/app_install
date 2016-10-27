@@ -94,8 +94,8 @@
 		<?php echo $this->Session->flash(); ?>
 		<div class="row-fluid">
 			<?php echo $content_for_layout ?>
-			<?php debug(Authsome::get('User')) ?>
-			<?php debug(Authsome::get('Role')) ?>
+			<?php //debug(Authsome::get('User')) ?>
+			<?php //debug(Authsome::get('Role')) ?>
 		</div>
 	</div>
 
