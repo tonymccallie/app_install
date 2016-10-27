@@ -72,18 +72,21 @@ class PagesController extends AppController {
 		
 		$User = ClassRegistry::init('User');
 		
-		$users = $User->find('count',array(
+		$user_totals = $User->find('all',array(
 			'conditions' => array(
 				'User.role_id' => 2
 			),
+			'contain' => array(),
+			'group' => array(
+				'User.school'
+			),
 			'fields' => array(
-				'DISTINCT User.school'
+				'User.school',
+				'User.school_count'
 			)
 		));
 		
-		debug($users);
-		
-		$this->set(compact('page', 'subpage', 'title_for_layout'));
+		$this->set(compact('page', 'subpage', 'title_for_layout','user_totals'));
 		$this->render(implode('/', $path));
 	}
 }

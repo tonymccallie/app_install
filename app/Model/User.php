@@ -3,6 +3,10 @@ App::uses('AppModel', 'Model');
 class User extends AppModel {
 	var $order = array('User.email');
 	
+	var $virtualFields = array(
+		'school_count' => 'COUNT(User.School)'
+	);
+	
 	var $belongsTo = array(
 		'Role' => array(
 			'className' => 'Role',
