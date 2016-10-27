@@ -12,12 +12,20 @@
 			</tr>
 		</thead>
 		<tbody>
-		<?php foreach($user_totals as $school): ?>
+		<?php $total = 0; ?>
+		<?php 
+			foreach($user_totals as $school): 
+				$total+=$school['User']['school_count'];
+		?>
 			<tr>
 				<td><?php echo $school['User']['school'] ?></td>
 				<td><?php echo $school['User']['school_count'] ?></td>
 			</tr>
 		<?php endforeach ?>
+		<tr>
+			<td>TOTAL:</td>
+			<td><?php echo $total ?></td>
+		</tr>
 		</tbody>
 	</table>
 </div>
